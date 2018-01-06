@@ -1,0 +1,4 @@
+.idea
+.vagrant
+secrets.yml
+*.retry
