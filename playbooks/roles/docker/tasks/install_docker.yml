@@ -1,0 +1,21 @@
+- name: ensure repository key is installed
+  apt_key:
+    id: "58118E89F3A912897C070ADBF76221572C52609D"
+    keyserver: "hkp://p80.pool.sks-keyservers.net:80"
+    state: present
+
+- name: ensure docker registry is available
+  apt_repository: repo='deb https://apt.dockerproject.org/repo ubuntu-trusty main' state=present
+
+- name: ensure docker and dependencies are installed
+  apt: name=docker-engine update_cache=yes
+
+- name: download docker-compose
+  command: sh -c 'curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose'
+
+- name: chmod docker-compose
+  file:
+    path: /usr/local/bin/docker-compose
+    mode: 0744
+
+- service: name=docker state=restarted

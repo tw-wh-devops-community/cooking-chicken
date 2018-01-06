@@ -1,0 +1,19 @@
+version: '2'
+services:
+  jenkins:
+    image: jenkins
+    container_name: jenkins
+    ports:
+      - 8080:8080
+    volumes:
+      - /tmp/jenkins:/var/jenkins_home
+      - /tmp/nginx/html:/tmp/nginx/html
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    volumes:
+      - /tmp/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - /tmp/nginx/html:/usr/share/nginx/html
+    ports:
+      - 80:80
+      - 443:443

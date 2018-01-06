@@ -1,0 +1,9 @@
+#!/usr/bin/env ansible-playbook
+- hosts: all
+  tasks:
+    - debug: var=ansible_distribution,ansible_env #ansible nginx -m setup -a 'filter=ansible_'
+
+- hosts: docker
+  become: yes
+  roles:
+    - docker

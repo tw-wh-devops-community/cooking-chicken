@@ -1,0 +1,34 @@
+#- include: install_docker.yml
+
+- name: create tmp folder
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - /tmp/nginx/html
+    - /tmp/jenkins
+
+- file:
+    path: /tmp/jenkins
+    owner: vagrant
+    group: vagrant
+
+- name: copy nginx config file
+  copy:
+    src: nginx.cfg
+    dest: /tmp/nginx/default.conf
+
+- name: copy default html file
+  template:
+    src: index.html
+    dest: /tmp/nginx/html/index.html
+
+- name: copy compose file
+  copy:
+    src: docker-compose.yml
+    dest: /tmp
+
+- name: run docker compose
+  command: sh -c 'docker-compose up -d --force-recreate'
+  args:
+    chdir: /tmp
