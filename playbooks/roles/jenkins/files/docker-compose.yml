@@ -1,0 +1,25 @@
+version: "2"
+services:
+  jenkins_master:
+    container_name: jenkins_master
+    image: jenkinsci/jenkins
+    restart: always
+    ports:
+    - "8080:8080"
+    - "50000:50000"
+    volumes:
+    - /data/jenkins:/var/jenkins_home
+
+  jenkins_slave_1:
+    container_name: jenkins_slave_1
+    image: jenkinsci/jnlp-slave
+    environment:
+      - JENKINS_URL=http://jenkins_master:8080
+      - JENKINS_SECRET=8dcd71e2b97a41dbb719a838d88c7a0a
+      - JENKINS_AGENT_NAME=jenkins_slave_1
+    volumes:
+    - /data/jenkins:/var/jenkins_home/worker
+    depends_on:
+      - jenkins_master
+    links:
+      - jenkins_master

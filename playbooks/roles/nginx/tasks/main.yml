@@ -1,0 +1,26 @@
+- name: create folder
+  file:
+    path: /data/nginx/html
+    state: directory
+
+- name: copy nginx config file
+  copy:
+    src: nginx.cfg
+    dest: /data/nginx/default.conf
+
+- name: copy default html file
+  template:
+    src: index.html
+    dest: /data/nginx/html/index.html
+
+- name: start nginx container
+  docker:
+    name: app
+    image: nginx:alpine
+    pull: always
+    state: reloaded
+    ports:
+      - "80:80"
+    volumes:
+      - /data/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - /data/nginx/html:/usr/share/nginx/html

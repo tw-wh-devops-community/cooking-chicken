@@ -10,12 +10,26 @@
 - name: ensure docker and dependencies are installed
   apt: name=docker-engine update_cache=yes
 
-- name: download docker-compose
+- name: check if install docker-compose
+  stat:
+    path: /usr/local/bin/docker-compose
+  register: composeInstalled
+
+- name: install docker-compose
   command: sh -c 'curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose'
+  when: composeInstalled.stat.exists == False
 
 - name: chmod docker-compose
   file:
     path: /usr/local/bin/docker-compose
     mode: 0744
+
+- name: install pip
+  apt:
+    name: python-pip
+
+- name: install docker-py
+  pip:
+    name: docker-py
 
 - service: name=docker state=restarted

@@ -3,7 +3,14 @@
   tasks:
     - debug: var=ansible_distribution,ansible_env #ansible nginx -m setup -a 'filter=ansible_'
 
-- hosts: docker
+- hosts: jenkins
   become: yes
   roles:
-    - docker
+    - common
+    - jenkins
+
+- hosts: nginx
+  become: yes
+  roles:
+    - common
+    - nginx

@@ -1,0 +1,19 @@
+- name: create folder
+  file:
+    path: /data/jenkins
+    state: directory
+
+- file:
+    path: /data/jenkins
+    owner: vagrant
+    group: vagrant
+
+- name: copy compose file
+  copy:
+    src: docker-compose.yml
+    dest: /data
+
+- name: run docker compose
+  command: sh -c 'docker-compose up -d --force-recreate'
+  args:
+    chdir: /data
