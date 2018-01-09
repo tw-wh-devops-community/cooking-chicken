@@ -13,6 +13,14 @@
     src: docker-compose.yml
     dest: /data
 
+- name: copy nginx private key
+  copy:
+    src: nginx_private_key
+    dest: /data/jenkins/nginx_private_key
+    owner: vagrant
+    group: vagrant
+    mode: 0700
+
 - name: run docker compose
   command: sh -c 'docker-compose up -d --force-recreate'
   args:
