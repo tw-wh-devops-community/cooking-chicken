@@ -2,9 +2,6 @@
   file:
     path: /data/jenkins
     state: directory
-
-- file:
-    path: /data/jenkins
     owner: vagrant
     group: vagrant
 

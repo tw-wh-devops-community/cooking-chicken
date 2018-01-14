@@ -12,8 +12,10 @@ services:
 
   jenkins_slave_1:
     container_name: jenkins_slave_1
-    image: evarga/jenkins-slave
+    image: jaydp17/jenkins-slave
     depends_on:
       - jenkins_master
     links:
       - jenkins_master
+    volumes:
+    - /data/jenkins:/var/jenkins_home
