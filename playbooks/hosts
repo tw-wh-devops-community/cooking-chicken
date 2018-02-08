@@ -1,2 +1,2 @@
-jenkins ansible_ssh_host=127.0.0.1 ansible_connection=ssh ansible_ssh_user=vagrant ansible_ssh_port=10101 ansible_ssh_private_key_file=../.vagrant/machines/jenkins/virtualbox/private_key
-nginx ansible_ssh_host=127.0.0.1 ansible_connection=ssh ansible_ssh_user=vagrant ansible_ssh_port=10102 ansible_ssh_private_key_file=../.vagrant/machines/nginx/virtualbox/private_key
+nginx ansible_ssh_host=192.168.56.101 ansible_connection=ssh ansible_ssh_user=vagrant ansible_ssh_port=22 ansible_ssh_private_key_file=../.vagrant/machines/nginx/virtualbox/private_key
+jenkins ansible_ssh_host=192.168.56.102 ansible_connection=ssh ansible_ssh_user=vagrant ansible_ssh_port=22 ansible_ssh_private_key_file=../.vagrant/machines/jenkins/virtualbox/private_key
