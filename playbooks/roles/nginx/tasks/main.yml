@@ -19,7 +19,7 @@
 
 - name: start nginx container
   docker:
-    name: app
+    name: chicken-html-container
     image: nginx:alpine
     pull: always
     state: reloaded

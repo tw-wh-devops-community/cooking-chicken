@@ -6,11 +6,11 @@
 - hosts: jenkins
   become: yes
   roles:
-    - common
+#    - common
     - jenkins
 
 - hosts: nginx
   become: yes
   roles:
-    - common
+#    - common
     - nginx

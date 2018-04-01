@@ -10,6 +10,16 @@
     src: docker-compose.yml
     dest: /data
 
+- name: copy jenkins master dockerfile
+  copy:
+    src: jenkins_master
+    dest: /data
+
+- name: copy jenkins slave dockerfile
+  copy:
+    src: jenkins_slave
+    dest: /data
+
 - name: copy nginx private key
   copy:
     src: nginx_private_key

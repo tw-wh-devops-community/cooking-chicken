@@ -2,18 +2,21 @@ version: "2"
 services:
   jenkins_master:
     container_name: jenkins_master
-    image: jenkinsci/jenkins
-    restart: always
+    build: /data/jenkins_master
+    image: my_jenkins_master
     ports:
     - "8080:8080"
     - "50000:50000"
     volumes:
     - /data/jenkins:/var/jenkins_home
+    - /var/run/docker.sock:/var/run/docker.sock
 
   jenkins_slave_1:
     container_name: jenkins_slave_1
-    image: jaydp17/jenkins-slave
+    build: /data/jenkins_slave
+    image: my_jenkins_slave
     depends_on:
       - jenkins_master
     volumes:
     - /data/jenkins:/var/jenkins_home
+    - /var/run/docker.sock:/var/run/docker.sock
